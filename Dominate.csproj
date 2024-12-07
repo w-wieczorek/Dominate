@@ -7,4 +7,12 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Accord.Genetic" Version="3.8.2-alpha" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="GeneticAlgorithm.cs" />
+    </ItemGroup>
+
 </Project>
