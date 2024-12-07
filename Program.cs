@@ -169,7 +169,7 @@ namespace Dominate
 			for (i = 0; i < graph.Size; ++i)
 			{
 				List<int>? neighbours;
-				if (graph.adj.TryGetValue(i, out neighbours))
+				if (node.Flag[i] == false && graph.adj.TryGetValue(i, out neighbours))
 				{
 					foreach (int v in neighbours)
 					{
@@ -188,7 +188,26 @@ namespace Dominate
 			
 			Array.Sort(degree);
 
-			int not_covered = graph.Size - (int)value;
+			int not_covered = graph.Size;
+			for (int v = 0; v < graph.Size; ++v)
+			{
+				if (node.Flag[v])
+				{
+					--not_covered;
+				}
+				else
+				{
+					foreach (int u in graph.adj[v])
+					{
+						if (node.Flag[u])
+						{
+							--not_covered;
+							break;
+						}
+					}
+				}
+			}
+			
 			int sum = 0;
 			i = graph.Size;
 			while (sum < not_covered)
